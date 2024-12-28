@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TabType, getTabsByType } from "./info/tabs.info";
 import { Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { colors } from "@/utils/styles/colors";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,13 +28,13 @@ export const Tabs = () => {
 								headerShown: false,
 								tabBarIcon: ({ focused }) => (
 									<View>
-										<Ionicons name={value.icon} size={24} style={{ color: focused ? "black" : "lightgray" }} />
+										<Ionicons name={value.icon} size={24} style={{ color: focused ? colors.black : colors.lightgray }} />
 									</View>
 								),
 								tabBarLabel: ({ focused }) => (
 									<Text
 										style={{
-											color: focused ? "black" : "gray",
+											color: focused ? colors.black : colors.lightgray,
 											fontWeight: "bold",
 										}}
 									>

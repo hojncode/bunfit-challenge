@@ -1,6 +1,6 @@
 import { SafeAreaView, StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Navigator } from "@/helpers/navigator";
+import { Navigator } from "@/helpers/Navigator";
 
 const App = () => {
 	return (

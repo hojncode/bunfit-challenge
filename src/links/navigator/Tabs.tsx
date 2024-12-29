@@ -12,7 +12,7 @@ export const Tabs = () => {
 	const tabList = tabTypes.flatMap((tabType) => getTabsByType({ tabType }));
 
 	return (
-		<Tab.Navigator initialRouteName={tabList[0].displayName}>
+		<Tab.Navigator initialRouteName={tabList[1].displayName}>
 			{tabList
 				.sort((a, b) => a.tabId - b.tabId)
 				.map((value) => {
@@ -28,7 +28,11 @@ export const Tabs = () => {
 								headerShown: false,
 								tabBarIcon: ({ focused }) => (
 									<View>
-										<Ionicons name={value.icon} size={24} style={{ color: focused ? colors.black : colors.lightgray }} />
+										<Ionicons
+											name={value.icon}
+											size={24}
+											style={{ color: focused ? colors.black : colors.lightgray }}
+										/>
 									</View>
 								),
 								tabBarLabel: ({ focused }) => (

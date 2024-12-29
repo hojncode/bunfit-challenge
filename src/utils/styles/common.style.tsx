@@ -4,8 +4,9 @@ import { colors } from "./colors";
 export const CommonStyles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: "center",
+		// justifyContent: "center",
 		alignItems: "center",
 		backgroundColor: colors.white,
+		paddingHorizontal: 20,
 	},
 });

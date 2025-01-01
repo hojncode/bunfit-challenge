@@ -16,6 +16,11 @@ export const getCurrentDate = () => {
 };
 
 export const getDaysArray = (currentDate: Day): Day[] => {
+	if (!currentDate || !currentDate.year || !currentDate.month) {
+		console.error("currentDate 없음:", currentDate);
+		return [];
+	}
+
 	const firstDateInMonth = new Date(currentDate.year, currentDate.month - 1, 1);
 	const lastDateInMonth = new Date(currentDate.year, currentDate.month, 0); // 해당월의 마지막 일자 = 해당 달력의 총 일자 수
 
@@ -43,12 +48,12 @@ export const getDaysArray = (currentDate: Day): Day[] => {
 		year: currentDate.month === 12 ? currentDate.year + 1 : currentDate.year,
 	}));
 
-	return [...prevMonth, ...currentMonthArray, ...nextMonth];
+	return [...prevMonth, ...currentMonthArray, ...nextMonth] || [];
 };
 
 export const useCalendarFunctions = (initState: Day) => {
 	const [currentDate, setCurrentDate] = useState(initState);
-	const [selectedDate, setSelectedDate] = useState({});
+	const [selectedDate, setSelectedDate] = useState(initState);
 
 	const handleChangeMonth = (type: string) => {
 		setCurrentDate((prev) => {
@@ -77,6 +82,28 @@ export const useCalendarFunctions = (initState: Day) => {
 		});
 	};
 
+	const handleChangeWeek = (type: string) => {
+		setCurrentDate((prev) => {
+			// 현재 기준 날짜를 선택된 날짜 또는 현재 날짜로 설정
+			const referenceDate = prev;
+
+			// 기준 날짜로부터 이동
+			const newDate = new Date(referenceDate.year, referenceDate.month - 1, referenceDate.date);
+
+			if (type === "prev") {
+				newDate.setDate(newDate.getDate() - 7); // 이전 주로 이동
+			} else if (type === "next") {
+				newDate.setDate(newDate.getDate() + 7); // 다음 주로 이동
+			}
+
+			return {
+				year: newDate.getFullYear(),
+				month: newDate.getMonth() + 1, // JavaScript 월은 0부터 시작하므로 +1
+				date: newDate.getDate(),
+			};
+		});
+	};
+
 	const handleDateChoice = (v: { date: number; month: number; year: number }) => {
 		setSelectedDate(v);
 
@@ -90,5 +117,5 @@ export const useCalendarFunctions = (initState: Day) => {
 		}
 	};
 
-	return { currentDate, selectedDate, handleChangeMonth, handleDateChoice };
+	return { currentDate, selectedDate, handleChangeMonth, handleChangeWeek, handleDateChoice };
 };

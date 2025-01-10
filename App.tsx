@@ -1,6 +1,6 @@
 import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Navigator } from "@/helpers/Navigator";
+import { Navigator } from "@/helpers/navigator";
 import { colors } from "@/utils/styles/colors";
 
 const App = () => {
